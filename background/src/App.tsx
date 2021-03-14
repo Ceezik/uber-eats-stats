@@ -1,5 +1,5 @@
-import React from "react";
+import React from 'react';
 
 export default function App(): JSX.Element {
-  return <h1>Uber eats stats background</h1>;
+    return <h1>Uber eats stats background</h1>;
 }

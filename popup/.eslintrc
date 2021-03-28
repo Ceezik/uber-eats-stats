@@ -1,0 +1,16 @@
+{
+    "parser": "babel-eslint",
+    "extends": ["react-app", "prettier"],
+    "plugins": ["prettier"],
+    "rules": {
+        "prettier/prettier": "error"
+    },
+    "overrides": [
+        {
+            "files": ["**/*.ts?(x)"],
+            "rules": {
+                "prettier/prettier": ["warn"]
+            }
+        }
+    ]
+}

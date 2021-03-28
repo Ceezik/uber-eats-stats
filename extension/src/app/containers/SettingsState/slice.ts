@@ -1,7 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ContainerState, SettingsState } from './types';
 
-export const initialState: ContainerState = {};
+export const initialState: ContainerState = {
+    isLoggedIn: false,
+};
 
 const settingsSlice = createSlice({
     name: 'settings',

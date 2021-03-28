@@ -1,5 +1,5 @@
 export interface SettingsState {
-    sid?: string;
+    isLoggedIn: boolean;
 }
 
 export type ContainerState = SettingsState;

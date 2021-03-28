@@ -15,10 +15,18 @@ export const getAvailableUberEatsTab = async (): Promise<
 
 export const sendMessageToAll = async (message: {
     action: string;
-    data: any;
+    data?: any;
 }): Promise<void> => {
     const currentTab = await getAvailableUberEatsTab();
     if (currentTab && currentTab.id)
         browser.tabs.sendMessage(currentTab.id, message);
     browser.runtime.sendMessage(message);
+};
+
+export const getUserUUIDFromCookie = (cookie: string): string | false => {
+    return cookie.split(';').reduce<false | string>((res, cur) => {
+        const matches = cur.trim().match(/^_userUuid=(.*)$/);
+        if (matches && matches.length === 2) return matches[1];
+        return res;
+    }, false);
 };

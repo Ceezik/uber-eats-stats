@@ -1,4 +1,4 @@
-import getSID from './chromeMessaging/getSID';
+import isLoggedIn from './chromeMessaging/isLoggedIn';
 
 chrome.runtime.onMessage.addListener(
     (
@@ -6,9 +6,11 @@ chrome.runtime.onMessage.addListener(
         sender: any,
         sendResponse: (data: any) => void
     ) => {
-        if (message.action === 'GET_SID') {
-            return sendResponse(getSID());
-        }
+        (async (): Promise<any> => {
+            if (message.action === 'IS_LOGGED_IN') {
+                return sendResponse(isLoggedIn());
+            }
+        })();
         return true;
     }
 );

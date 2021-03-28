@@ -3,21 +3,21 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useInjectReducer } from 'redux-injectors';
 import { selectSettings } from './selectors';
 import { sliceKey, reducer, actions } from './slice';
-import listenForSID from '../../../listeners/SIDListener';
-import getSID from '../../../services/chromeMessaging/getSID';
+import { authListener } from '../../../listeners';
+import { isLoggedIn } from '../../../services/chromeMessaging';
 
 export function SettingsState(): JSX.Element {
     useInjectReducer({ key: sliceKey, reducer });
     const dispatch = useDispatch();
-    const { sid } = useSelector(selectSettings);
+    const { isLoggedIn: loggedIn } = useSelector(selectSettings);
 
-    const storeSID = (sid?: string) =>
-        dispatch(actions.setSettingsState({ sid }));
+    const storeAuthState = (loggedIn: boolean) =>
+        dispatch(actions.setSettingsState({ isLoggedIn: loggedIn }));
 
     useEffect(() => {
-        getSID().then(storeSID);
-        listenForSID(storeSID);
+        isLoggedIn().then(storeAuthState);
+        authListener(storeAuthState);
     }, []);
 
-    return <p>sid: {sid}</p>;
+    return <p>isLoggedIn: {loggedIn.toString()}</p>;
 }

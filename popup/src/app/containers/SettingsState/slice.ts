@@ -1,16 +1,16 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ContainerState, SettingsState } from "./types";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { ContainerState, SettingsState } from './types';
 
 export const initialState: ContainerState = {};
 
 const settingsSlice = createSlice({
-  name: "settings",
-  initialState,
-  reducers: {
-    setSettingsState(state, action: PayloadAction<Partial<SettingsState>>) {
-      return { ...state, ...action.payload };
+    name: 'settings',
+    initialState,
+    reducers: {
+        setSettingsState(state, action: PayloadAction<Partial<SettingsState>>) {
+            return { ...state, ...action.payload };
+        },
     },
-  },
 });
 
 export const { actions, reducer, name: sliceKey } = settingsSlice;

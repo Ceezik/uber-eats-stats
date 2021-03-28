@@ -24,7 +24,8 @@
         "webextension-polyfill-ts": "^0.25.0"
     },
     "devDependencies": {
-        "babel-eslint": "^10.1.0",
+        "@typescript-eslint/eslint-plugin": "^4.19.0",
+        "@typescript-eslint/parser": "^4.19.0",
         "cra-build-watch": "^3.4.0",
         "eslint": "^7.23.0",
         "eslint-config-prettier": "^8.1.0",
@@ -32,13 +33,8 @@
         "prettier": "^2.2.1"
     },
     "scripts": {
-        "watch": "cra-build-watch -b ../build/popup"
-    },
-    "eslintConfig": {
-        "extends": [
-            "react-app",
-            "react-app/jest"
-        ]
+        "watch": "cra-build-watch -b ../build/popup",
+        "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx --fix"
     },
     "browserslist": {
         "production": [

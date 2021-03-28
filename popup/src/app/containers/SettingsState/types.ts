@@ -1,5 +1,5 @@
 export interface SettingsState {
-  sid?: string;
+    sid?: string;
 }
 
 export type ContainerState = SettingsState;

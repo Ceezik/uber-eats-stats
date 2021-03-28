@@ -1,10 +1,13 @@
 {
-    "parser": "babel-eslint",
-    "extends": ["react-app", "prettier"],
-    "plugins": ["prettier"],
-    "rules": {
-        "prettier/prettier": "error"
-    },
+    "parser": "@typescript-eslint/parser",
+    "plugins": ["@typescript-eslint", "prettier"],
+    "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended",
+        "react-app",
+        "prettier"
+    ],
     "overrides": [
         {
             "files": ["**/*.ts?(x)"],
@@ -12,5 +15,12 @@
                 "prettier/prettier": ["warn"]
             }
         }
-    ]
+    ],
+    "rules": {
+        "prettier/prettier": "error",
+        "react-hooks/exhaustive-deps": 0,
+        "@typescript-eslint/ban-ts-comment": 0,
+        "@typescript-eslint/no-explicit-any": 0,
+        "@typescript-eslint/explicit-module-boundary-types": 0
+    }
 }

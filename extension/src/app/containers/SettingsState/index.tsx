@@ -9,7 +9,7 @@ import { isLoggedIn } from '../../../services/chromeMessaging';
 export function SettingsState(): JSX.Element {
     useInjectReducer({ key: sliceKey, reducer });
     const dispatch = useDispatch();
-    const { isLoggedIn: loggedIn, showStats } = useSelector(selectSettings);
+    const { isLoggedIn: loggedIn } = useSelector(selectSettings);
 
     const storeAuthState = (loggedIn: boolean) =>
         dispatch(actions.setSettingsState({ isLoggedIn: loggedIn }));
@@ -24,11 +24,5 @@ export function SettingsState(): JSX.Element {
         showStatsListener(setShowStats);
     }, []);
 
-    return (
-        <p>
-            isLoggedIn: {loggedIn.toString()}
-            <br />
-            showStats: {showStats.toString()}
-        </p>
-    );
+    return <p>isLoggedIn: {loggedIn.toString()}</p>;
 }

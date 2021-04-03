@@ -3,6 +3,7 @@ import { ContainerState, SettingsState } from './types';
 
 export const initialState: ContainerState = {
     isLoggedIn: false,
+    showStats: false,
 };
 
 const settingsSlice = createSlice({

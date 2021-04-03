@@ -1,4 +1,4 @@
-import isLoggedIn from './chromeMessaging/isLoggedIn';
+import { showStats, isLoggedIn } from './chromeMessaging';
 
 chrome.runtime.onMessage.addListener(
     (
@@ -9,6 +9,9 @@ chrome.runtime.onMessage.addListener(
         (async (): Promise<any> => {
             if (message.action === 'IS_LOGGED_IN') {
                 return sendResponse(isLoggedIn());
+            }
+            if (message.action === 'SHOW_STATS') {
+                return sendResponse(showStats());
             }
         })();
         return true;

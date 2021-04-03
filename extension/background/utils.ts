@@ -13,6 +13,39 @@ export const getAvailableUberEatsTab = async (): Promise<
     }, undefined);
 };
 
+export const focusUberEatsTab = async (): Promise<Tabs.Tab | undefined> => {
+    const currentTab = await getAvailableUberEatsTab();
+    if (currentTab && currentTab.id) {
+        browser.tabs.update(currentTab.id, { active: true });
+        return currentTab;
+    }
+    return undefined;
+};
+
+export const openUberEatsTab = async (): Promise<Tabs.Tab> => {
+    const newTab = await browser.tabs.create({
+        active: true,
+        url: 'https://ubereats.com',
+    });
+    return new Promise((resolve) => {
+        const listener = (
+            tabId: number,
+            changeInfo: Tabs.OnUpdatedChangeInfoType
+        ) => {
+            if (tabId === newTab.id && changeInfo.status === 'complete') {
+                browser.tabs.onUpdated.removeListener(listener);
+                return resolve(newTab);
+            }
+        };
+        browser.tabs.onUpdated.addListener(listener);
+    });
+};
+
+export const openOrFocusUberEatsTab = async (): Promise<Tabs.Tab> => {
+    const currentTab = await focusUberEatsTab();
+    return currentTab || openUberEatsTab();
+};
+
 export const sendMessageToAll = async (message: {
     action: string;
     data?: any;

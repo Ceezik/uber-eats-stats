@@ -1,19 +1,19 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ContainerState, SettingsState } from './types';
+import { ContainerState } from './types';
 
 export const initialState: ContainerState = {
     isLoggedIn: false,
     showStats: false,
 };
 
-const settingsSlice = createSlice({
-    name: 'settings',
+const useSettingsSlice = createSlice({
+    name: 'useSettings',
     initialState,
     reducers: {
-        setSettingsState(state, action: PayloadAction<Partial<SettingsState>>) {
+        setState(state, action: PayloadAction<Partial<ContainerState>>) {
             return { ...state, ...action.payload };
         },
     },
 });
 
-export const { actions, reducer, name: sliceKey } = settingsSlice;
+export const { actions, reducer, name: sliceKey } = useSettingsSlice;

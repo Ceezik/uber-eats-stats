@@ -1,3 +1,3 @@
-import authListenerImport from './authListener';
+import authListener from './authListener';
 
-export const authListener = authListenerImport;
+export { authListener };

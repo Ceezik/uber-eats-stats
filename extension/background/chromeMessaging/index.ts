@@ -1,5 +1,5 @@
-import isLoggedInImport from './isLoggedIn';
-import showStatsImport from './showStats';
+import isLoggedIn from './isLoggedIn';
+import showStats from './showStats';
+import login from './login';
 
-export const isLoggedIn = isLoggedInImport;
-export const showStats = showStatsImport;
+export { login, showStats, isLoggedIn };

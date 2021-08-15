@@ -1,10 +1,9 @@
 import React, { useEffect, useMemo } from 'react';
 import { createPortal } from 'react-dom';
-import { Provider, useSelector } from 'react-redux';
+import { Provider } from 'react-redux';
 import configureAppStore from '../store/configureStore';
 import { ShowStatsButton } from './components/ShowStatsButton';
-import { SettingsState } from './containers/SettingsState';
-import { selectSettings } from './containers/SettingsState/selectors';
+import useSettings from '../hooks/useSettings';
 
 const mainContent = document.querySelector('#main-content > div');
 const store = configureAppStore();
@@ -28,13 +27,12 @@ export default function ConnectedApp(): JSX.Element {
 }
 
 function App(): JSX.Element {
-    const { showStats, isLoggedIn } = useSelector(selectSettings);
+    const { showStats, isLoggedIn } = useSettings();
 
     return (
         <>
             {showStats && isLoggedIn && <div>show stats modal</div>}
 
-            <SettingsState />
             <h1>Uber eats stats</h1>
             {isLoggedIn && <ShowStatsButton />}
         </>

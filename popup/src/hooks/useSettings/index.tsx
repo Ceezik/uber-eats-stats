@@ -1,23 +1,24 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useInjectReducer } from 'redux-injectors';
-import { selectSettings } from './selectors';
+import { selectUseSettings } from './selectors';
 import { sliceKey, reducer, actions } from './slice';
-import { authListener } from '../../../listeners';
-import { isLoggedIn } from '../../../services/chromeMessaging';
+import { isLoggedIn } from '../../services/chromeMessaging';
+import { ContainerState } from './types';
+import { authListener } from '../../listeners';
 
-export function SettingsState(): JSX.Element {
+export default function useSettings(): ContainerState {
     useInjectReducer({ key: sliceKey, reducer });
     const dispatch = useDispatch();
-    const { isLoggedIn: loggedIn } = useSelector(selectSettings);
+    const useSsettingsState = useSelector(selectUseSettings);
 
     const storeAuthState = (loggedIn: boolean) =>
-        dispatch(actions.setSettingsState({ isLoggedIn: loggedIn }));
+        dispatch(actions.setState({ isLoggedIn: loggedIn }));
 
     useEffect(() => {
         isLoggedIn().then(storeAuthState);
         authListener(storeAuthState);
     }, []);
 
-    return <p>isLoggedIn: {loggedIn.toString()}</p>;
+    return useSsettingsState;
 }

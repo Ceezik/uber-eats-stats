@@ -1,8 +1,8 @@
 import { AnyAction, Reducer } from '@reduxjs/toolkit';
-import { SettingsState } from '../app/containers/SettingsState/types';
+import { UseSettingsState } from '../hooks/useSettings/types';
 
 export interface RootState {
-    settings?: SettingsState;
+    useSettings?: UseSettingsState;
 }
 
 type RequiredRootState = Required<RootState>;

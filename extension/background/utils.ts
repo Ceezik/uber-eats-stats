@@ -1,10 +1,24 @@
 import { browser, Tabs } from 'webextension-polyfill-ts';
+import { UBER_EATS_BASE_URL } from './constants';
+
+export const isUberEatsUrl = (url: string): boolean =>
+    /https:\/\/www\.ubereats\.com/.test(url);
+
+export const goTo = ({
+    url,
+    tabId,
+}: {
+    url: string;
+    tabId: Tabs.Tab['id'];
+}): Promise<Tabs.Tab> => {
+    return browser.tabs.update(tabId, { url });
+};
 
 export const getAvailableUberEatsTab = async (): Promise<
     Tabs.Tab | undefined
 > => {
     const tabs = await browser.tabs.query({
-        url: ['https://www.ubereats.com/*'],
+        url: [`${UBER_EATS_BASE_URL}/*`],
     });
 
     return tabs.reduce<Tabs.Tab | undefined>((res, tab) => {
@@ -25,7 +39,7 @@ export const focusUberEatsTab = async (): Promise<Tabs.Tab | undefined> => {
 export const openUberEatsTab = async (): Promise<Tabs.Tab> => {
     const newTab = await browser.tabs.create({
         active: true,
-        url: 'https://ubereats.com',
+        url: UBER_EATS_BASE_URL,
     });
     return new Promise((resolve) => {
         const listener = (

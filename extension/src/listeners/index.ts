@@ -1,5 +1,5 @@
-import authListenerImport from './authListener';
-import showStatsListenerImport from './showStatsListener';
+import authListener from './authListener';
+import showStatsListener from './showStatsListener';
+import urlChanged from './urlChanged';
 
-export const authListener = authListenerImport;
-export const showStatsListener = showStatsListenerImport;
+export { authListener, showStatsListener, urlChanged };

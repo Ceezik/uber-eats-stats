@@ -1,3 +1,4 @@
-import isLoggedInImport from './isLoggedIn';
+import isLoggedIn from './isLoggedIn';
+import login from './login';
 
-export const isLoggedIn = isLoggedInImport;
+export { isLoggedIn, login };

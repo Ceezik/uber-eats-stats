@@ -1,5 +1,5 @@
 import { browser } from 'webextension-polyfill-ts';
-import { USER_UUID_KEY } from '../constants';
+import { UBER_EATS_API_URL, USER_UUID_KEY } from '../constants';
 import { sendMessageToAll, getUserUUIDFromCookie } from '../utils';
 
 browser.webRequest.onSendHeaders.addListener(
@@ -21,6 +21,6 @@ browser.webRequest.onSendHeaders.addListener(
         }
         return details;
     },
-    { urls: ['<all_urls>'] },
+    { urls: [`${UBER_EATS_API_URL}/*`] },
     ['extraHeaders', 'requestHeaders']
 );

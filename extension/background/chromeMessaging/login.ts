@@ -1,10 +1,8 @@
-import { browser } from 'webextension-polyfill-ts';
-import { openOrFocusUberEatsTab } from '../utils';
+import { UBER_EATS_LOGIN_URL } from '../constants';
+import { goTo, openOrFocusUberEatsTab } from '../utils';
 
 export default async function login(): Promise<boolean> {
     const tab = await openOrFocusUberEatsTab();
     if (!tab.id) return false;
-    return !!browser.tabs.update(tab.id, {
-        url: 'https://auth.uber.com/login/',
-    });
+    return !!goTo({ tabId: tab.id, url: UBER_EATS_LOGIN_URL });
 }
